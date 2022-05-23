@@ -97,7 +97,6 @@ function getSpeciality($speciality) {
             ],
             'layout' => "{items}",
 //        'filterModel' => $searchModel,
-            'renderColumnGroup' => false,
             'columns' => [
                 [
                     'class' => 'yii\grid\DataColumn',
