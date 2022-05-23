@@ -28,12 +28,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrapper d-flex h-100 w-100 flex-column justify-content-between">
-    <main role="main" class="d-flex align-items-center justify-content-center h-100 w-100">
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </main>
-
-    <footer class="footer mt-auto text-muted">
+    <header class="mt-auto text-muted">
         <div class="container w-100 d-flex justify-content-end">
             <p>
                 <?php
@@ -48,7 +43,7 @@ AppAsset::register($this);
                             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                             . Html::submitButton(
                                 'Выйти (' . Yii::$app->user->identity->username . ')',
-                                ['class' => 'btn btn-link logout']
+                                ['class' => 'btn btn-link']
                             )
                             . Html::endForm()
                             . '</li>'
@@ -59,7 +54,12 @@ AppAsset::register($this);
                 ?>
             </p>
         </div>
-    </footer>
+    </header>
+
+    <main role="main" class="d-flex align-items-center justify-content-center h-100 w-100">
+        <?= Alert::widget() ?>
+        <?= $content ?>
+    </main>
 </div>
 
 

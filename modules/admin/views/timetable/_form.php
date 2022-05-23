@@ -15,12 +15,14 @@ use yii\helpers\Html;
         <div class="schedule__info">
             <div class="schedule__left">
                 <div class="schedule__back">
-                    <svg width="17" height="28" viewBox="0 0 17 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 24.71L6.49258 14L17 3.29L13.7652 0L0 14L13.7652 28L17 24.71Z" fill="#A3A3C9"/>
-                    </svg>
+                    <a href="/admin/timetable/index">
+                        <svg width="17" height="28" viewBox="0 0 17 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 24.71L6.49258 14L17 3.29L13.7652 0L0 14L13.7652 28L17 24.71Z" fill="#A3A3C9"/>
+                        </svg>
+                    </a>
                 </div>
                 <div class="schedule__spec">
-                    Для добавления выберите:
+                    Для добавления пары выберите:
                 </div>
             </div>
         </div>
@@ -43,7 +45,7 @@ use yii\helpers\Html;
                 'labelOptions' => ['class' => 'btn btn-primary'],
                 'class' => 'btn-group',
                 'options' => [
-                    'class' =>'btn-group btn-group-toggle'
+                    'class' => 'btn-group btn-group-toggle'
                 ],
                 'items' => [1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '1м', 6 => '2м']
             ])->label(false) ?>
@@ -56,7 +58,7 @@ use yii\helpers\Html;
                 'labelOptions' => ['class' => 'btn btn-primary'],
                 'class' => 'btn-group',
                 'options' => [
-                    'class' =>'btn-group btn-group-toggle'
+                    'class' => 'btn-group btn-group-toggle'
                 ],
                 'items' => [0 => 'Общая', 1 => '1 подгруппа', 2 => '2 подгруппа']
             ])->label(false) ?>
@@ -67,7 +69,7 @@ use yii\helpers\Html;
                 'labelOptions' => ['class' => 'btn btn-primary'],
                 'class' => 'btn-group',
                 'options' => [
-                    'class' =>'btn-group btn-group-toggle'
+                    'class' => 'btn-group btn-group-toggle'
                 ],
                 'items' => [1 => 'Нижняя', 2 => 'Верхняя']
             ])->label(false) ?>
@@ -78,18 +80,18 @@ use yii\helpers\Html;
                 'labelOptions' => ['class' => 'btn btn-primary'],
                 'class' => 'btn-group',
                 'options' => [
-                    'class' =>'btn-group btn-group-toggle'
+                    'class' => 'btn-group btn-group-toggle'
                 ],
                 'items' => [1 => 'Пн', 2 => 'Вт', 3 => 'Ср', 4 => 'Чт', 5 => 'Пт', 6 => 'Сб']
             ])->label(false) ?>
 
             <p class="label">Пара:</p>
-            <?= $form->field($model, 'day')->widget(ToggleButtonGroup::class, [
+            <?= $form->field($model, 'number')->widget(ToggleButtonGroup::class, [
                 'type' => ToggleButtonGroup::TYPE_RADIO,
                 'labelOptions' => ['class' => 'btn btn-primary'],
                 'class' => 'btn-group',
                 'options' => [
-                    'class' =>'btn-group btn-group-toggle'
+                    'class' => 'btn-group btn-group-toggle'
                 ],
                 'items' => [1 => '8.00-9:35', 2 => '9:50-11:25', 3 => '11:55-13:30', 4 => '13:45-15:20', 5 => '15:50-17:25']
             ])->label(false) ?>

@@ -1,7 +1,7 @@
 /* Styles for default elements */
 body {
     font-family: 'Roboto', sans-serif;
-    background: #DAECFF;
+    background: #FDFCFF;
     color: #333535;
 }
 
@@ -54,6 +54,10 @@ label, .label {
     border: none;
 }
 
+.btn.btn-link {
+    background: none;
+    color: #6c757d;
+}
 /* Футер */
 .footer {
     background: #DAECFF;
@@ -173,6 +177,20 @@ label, .label {
     font-weight: 500;
     font-size: 10px;
     color: #8F9498;
+}
+
+.schedule__table {
+    padding-bottom: 80px;
+}
+
+.schedule__edit {
+    font-size: 12px;
+    color: #8F9498;
+    margin-bottom: 20px;
+}
+
+.schedule__edit svg {
+    margin-right: 10px;
 }
 
 .time {

@@ -12,7 +12,7 @@ use yii\helpers\Html;
 <div class="timetable-search d-flex flex-column align-items-center">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['main'],
+        'action' => ['index'],
         'method' => 'get',
     ]); ?>
 

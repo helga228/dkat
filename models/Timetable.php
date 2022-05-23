@@ -17,6 +17,7 @@ use Yii;
  * @property string|null $teacher
  * @property string|null $cabinet
  * @property string|null $lesson
+ * @property string|null $number
  */
 class Timetable extends \yii\db\ActiveRecord
 {
@@ -35,7 +36,7 @@ class Timetable extends \yii\db\ActiveRecord
     {
         return [
             [['speciality', 'week'], 'integer'],
-            [['course', 'group', 'subgroup', 'day'], 'string'],
+            [['course', 'group', 'subgroup', 'day', 'number'], 'string'],
             [['teacher', 'cabinet', 'lesson'], 'string', 'max' => 255],
         ];
     }
@@ -56,6 +57,7 @@ class Timetable extends \yii\db\ActiveRecord
             'teacher' => 'Teacher',
             'cabinet' => 'Cabinet',
             'lesson' => 'Lesson',
+            'number' => 'Number',
         ];
     }
 }
