@@ -1,0 +1,256 @@
+/* Styles for default elements */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #DAECFF;
+    color: #333535;
+}
+
+/* Форма на главной для поиска */
+#w0, #login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Элемент формы */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Заголовок инпута */
+label, .label {
+    font-weight: 500;
+    font-size: 12px;
+    align-self: flex-start;
+    margin-bottom: 8px;
+    white-space: nowrap;
+}
+
+/* Select и Input */
+.form-control {
+    border-radius: 10px;
+}
+
+/* Кнопка */
+.btn {
+    background: #003CBE;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #fff;
+    padding: 10px 30px;
+    margin: 0 auto;
+}
+
+.btn.btn-primary.active {
+    background: #6D94DF;
+}
+
+.btn.btn-primary {
+    background: #DAECFF;
+    color: #333535;
+    border: none;
+}
+
+/* Футер */
+.footer {
+    background: #DAECFF;
+}
+
+/* Кнопка в футере */
+.nav-link {
+    color: #8F9498;
+}
+
+.help-block {
+    font-size: 11px;
+    color: #8F9498;
+    margin: 4px 0 0 10px;
+}
+
+/* Custom CSS */
+.auth {
+    background: #DAECFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    box-shadow: 0 2px 36px rgba(24, 13, 85, 0.07), 0 0.446726px 8.04107px rgba(24, 13, 85, 0.0417275), 0 0.133002px 2.39404px rgba(24, 13, 85, 0.0282725);
+    border-radius: 30px;
+    padding: 40px !important;
+    width: 610px;
+    background: #ffffff;
+}
+
+.form-title {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.find-btn {
+    margin-top: 20px;
+}
+
+/* Расписание */
+
+.schedule {
+    background: #FDFCFF;
+    padding: 33px 54px;
+}
+
+.schedule__top {
+    background: #FFFFFF;
+    box-shadow: 0 2px 36px rgba(24, 13, 85, 0.07), 0 0.446726px 8.04107px rgba(24, 13, 85, 0.0417275), 0 0.133002px 2.39404px rgba(24, 13, 85, 0.0282725);
+    border-radius: 30px;
+    padding: 22px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule__info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.schedule__form {
+    margin-top: 23px;
+}
+
+.schedule__left, .schedule__right {
+    display: flex;
+    align-items: center;
+}
+
+.schedule__back svg {
+    cursor: pointer;
+    margin-right: 32px;
+}
+
+.schedule__spec {
+    font-weight: 500;
+}
+
+.schedule__course {
+    font-weight: 500;
+    color: #8F9498;
+}
+
+.schedule__map {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.schedule__item {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+}
+
+.schedule__color {
+    width: 16px;
+    height: 16px;
+    background: #DAECFF;
+    border-radius: 50px;
+    margin-right: 8px;
+}
+
+.schedule__item:nth-child(2) .schedule__color {
+    background: #FFF2D9;
+}
+
+.schedule__item:nth-child(3) .schedule__color {
+    background: #E2FFDA;
+}
+
+.schedule__color-name {
+    font-weight: 500;
+    font-size: 10px;
+    color: #8F9498;
+}
+
+.time {
+    text-align: center;
+    color: #8F9498;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.class {
+    border-radius: 20px;
+    background: #DAECFF;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 14px;
+    font-weight: 500;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.class.subgroup1{
+    background: #FFF2D9;
+    aspect-ratio: 2 / 1;
+}
+
+.class.subgroup2{
+    background: #E2FFDA;
+    aspect-ratio: 2 / 1;
+}
+
+.class__name {
+    color: #333535;
+    margin-bottom: 8px;
+}
+
+.class__teacher {
+    color: #A3A3C9;
+}
+
+.class__bottom {
+    align-self: end;
+}
+
+.class__cabinet {
+    color: #6D94DF;
+}
+
+/* Стили для таблицы: */
+
+.table {
+    margin: 0;
+    border: 2px solid #FDFCFF;
+}
+
+.table th {
+    color: #8F9498;
+    text-align: center;
+    border-color: #F1F1F1;
+}
+
+.table td {
+    padding: 2px;
+    border-color: #F1F1F1;
+}
+
+.table td:first-child {
+    vertical-align: middle;
+}
+
+/* Admin */
+
+.create-btn {
+    margin-top: 22px;
+    margin-left: 20px
+}
+
+.add {
+    padding: 30px;
+}
