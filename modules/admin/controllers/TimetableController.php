@@ -1,8 +1,6 @@
 <?php
 
 namespace app\modules\admin\controllers;
-
-use app\models\Timetable;
 use app\models\TimetableSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -121,12 +119,12 @@ class TimetableController extends Controller
      * Finds the Timetable model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Timetable the loaded model
+     * @return TimetableSearch the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Timetable::findOne(['id' => $id])) !== null) {
+        if (($model = TimetableSearch::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
