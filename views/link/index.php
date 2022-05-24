@@ -36,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'table table-bordered'
                 ],
                 'layout' => "{items}",
-//                'filterModel' => $searchModel,
                 'columns' => [
                     [
                         'class' => 'yii\grid\DataColumn',

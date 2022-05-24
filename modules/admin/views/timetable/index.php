@@ -26,15 +26,15 @@ $numbers = [
 ];
 yii\bootstrap4\BootstrapAsset::register($this);
 
-function classContent($subgroup, $lesson, $teacher, $cabinet)
+function classContent($id, $subgroup, $lesson, $teacher, $cabinet)
 {
     switch ($subgroup) {
         case 0:
-            return '<div class = "class"><div class = "class__top"><div class = "class__name">' . $lesson . '</div><div class = "class__teacher">' . $teacher . '</div></div><div class = "class__bottom"><div class = "class__cabinet">ауд. ' . $cabinet . '</div></div>';
+            return '<a class="text-decoration-none" href="/admin/timetable/view?id=' . $id . '"><div class = "class"><div class = "class__top"><div class = "class__name">' . $lesson . '</div><div class = "class__teacher">' . $teacher . '</div></div><div class = "class__bottom"><div class = "class__cabinet">ауд. ' . $cabinet . '</div></div></div></a>';
         case 1:
-            return '<div class = "class subgroup1"><div class = "class__top"><div class = "class__name">' . $lesson . '</div><div class = "class__teacher">' . $teacher . '</div></div><div class = "class__bottom"><div class = "class__cabinet">ауд. ' . $cabinet . '</div></div>';
+            return '<a class="text-decoration-none" href="/admin/timetable/view?id=' . $id . '"><div class = "class subgroup1"><div class = "class__top"><div class = "class__name">' . $lesson . '</div><div class = "class__teacher">' . $teacher . '</div></div><div class = "class__bottom"><div class = "class__cabinet">ауд. ' . $cabinet . '</div></div></div></a>';
         case 2:
-            return '<div class = "class subgroup2"><div class = "class__top"><div class = "class__name">' . $lesson . '</div><div class = "class__teacher">' . $teacher . '</div></div><div class = "class__bottom"><div class = "class__cabinet">ауд. ' . $cabinet . '</div></div>';
+            return '<a class="text-decoration-none" href="/admin/timetable/view?id=' . $id . '"><div class = "class subgroup2"><div class = "class__top"><div class = "class__name">' . $lesson . '</div><div class = "class__teacher">' . $teacher . '</div></div><div class = "class__bottom"><div class = "class__cabinet">ауд. ' . $cabinet . '</div></div></div></a>';
         default:
             return 'Неверный номер подгруппы';
     }
@@ -85,7 +85,7 @@ function getTime($number) {
 <div class="schedule w-100 h-100">
 
     <div class="schedule__top">
-        <div class="schedule__info">
+        <div class="schedule__info flex-column">
             <div class="schedule__left">
                 <div class="schedule__back">
                     <a href="/">
@@ -95,13 +95,11 @@ function getTime($number) {
                     </a>
                 </div>
                 <div class="schedule__spec">
-                    <?= getSpeciality($searchModel->speciality) ?>
+                    Для поиска пар выберите:
                 </div>
             </div>
-            <div class="schedule__right">
-                <div class="schedule__course"><?= $searchModel->week == 1 ? 'Нижняя' : 'Верхняя' ?> неделя,
-                    <?= $searchModel->course ?> курс <?= $searchModel->group ?> группа
-                </div>
+            <div class="schedule__form">
+                <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
             </div>
         </div>
     </div>
@@ -121,7 +119,14 @@ function getTime($number) {
         </div>
     </div>
 
-    <div class="schedule__table w-80">
+    <div class="schedule__edit">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.2 4H8.8V5.6H7.2V4ZM8 12C8.44 12 8.8 11.64 8.8 11.2V8C8.8 7.56 8.44 7.2 8 7.2C7.56 7.2 7.2 7.56 7.2 8V11.2C7.2 11.64 7.56 12 8 12ZM8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM8 14.4C4.472 14.4 1.6 11.528 1.6 8C1.6 4.472 4.472 1.6 8 1.6C11.528 1.6 14.4 4.472 14.4 8C14.4 11.528 11.528 14.4 8 14.4Z" fill="#8F9498"/>
+        </svg>
+        Для редактирования нажмите на пару
+    </div>
+
+    <div class="schedule__table w-80 <?= $searchModel->speciality == null ? 'd-none' : 'd-block' ?>">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -155,7 +160,7 @@ function getTime($number) {
                             } else {
                                 $value = '';
                                 foreach ($model['subgroups'] as $subgroup) {
-                                    $value .= classContent($subgroup['subgroup'], $subgroup['lesson'], $subgroup['teacher'], $subgroup['cabinet']);
+                                    $value .= classContent($subgroup['id'], $subgroup['subgroup'], $subgroup['lesson'], $subgroup['teacher'], $subgroup['cabinet']);
                                 }
                                 echo $value;
                             }
