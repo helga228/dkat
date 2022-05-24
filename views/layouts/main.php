@@ -37,6 +37,7 @@ AppAsset::register($this);
                     'options' => ['class' => 'footer-btn d-flex flex-row'],
                     'items' => [
                         ['label'=>  'Полезная информация', 'url' => ['/link']],
+                        Yii::$app->user->isGuest ? ''  :  ['label' => 'Режим администратора', 'url' => ['/admin/timetable/index']],
                         Yii::$app->user->isGuest ? (
                         ['label' => 'Войти как администратор', 'url' => ['/site/login']]
                         ) : (
