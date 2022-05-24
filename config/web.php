@@ -37,9 +37,7 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
-        'links' => [
-                'class' => 'app\modules\links\Module',
-            ],
+
     ],
     'params' => $params,
 ];

@@ -34,8 +34,9 @@ AppAsset::register($this);
                 <?php
 
                 echo Nav::widget([
-                    'options' => ['class' => 'footer-btn'],
+                    'options' => ['class' => 'footer-btn d-flex flex-row'],
                     'items' => [
+                        ['label'=>  'Полезная информация', 'url' => ['/site/login']],
                         Yii::$app->user->isGuest ? (
                         ['label' => 'Войти как администратор', 'url' => ['/site/login']]
                         ) : (

@@ -75,6 +75,28 @@ class TimetableSearch extends Timetable
             ->andFilterWhere(['cabinet' => $this->cabinet])
             ->andFilterWhere(['lesson' => $this->lesson]);
 
+        $tempModels = [];
+        foreach ($dataProvider->models as $model) {
+            $key = implode('-', [$model['number'], $model['day']]);
+            if(!isset($tempModels[$key])){
+                $tempModels[$key] = [
+                    'number' => $model['number'],
+                    'day' => $model['day'],
+                    'subgroups' => [],
+                ];
+            }
+            $tempModels[$key]['subgroups'][] = [
+                'speciality' => $model['speciality'],
+                'id' => $model['id'],
+                'subgroup' => $model['subgroup'],
+                'lesson' => $model['lesson'],
+                'cabinet' => $model['cabinet'],
+                'teacher' => $model['teacher'],
+            ];
+        }
+        $dataProvider->models = $tempModels;
+
         return $dataProvider;
+
     }
 }

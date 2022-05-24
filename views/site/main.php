@@ -1,20 +1,34 @@
 <?php
 
-/** @var yii\web\View $this */
+use yii\helpers\ArrayHelper;
 
-use yii\grid\GridView;
-use yii\helpers\Url;
-use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
+/**
+ * @var $dataProvider \yii\data\ArrayDataProvider
+ */
 /* @var $searchModel app\models\TimetableSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $day app\models\Timetable */
-/* @var $model app\models\TimetableSearch */
-
 $this->title = 'Расписание';
-function classContent($subgroup, $lesson, $teacher, $cabinet) {
-    switch($subgroup) {
+$models = $dataProvider->getModels();
+$alreadyUseNumbers = [];
+$days = [
+    1 => 'Понедельник',
+    2 => 'Вторник',
+    3 => 'Среда',
+    4 => 'Четверг',
+    5 => 'Пятница',
+    6 => 'Суббота',
+];
+$numbers = [
+    1 => '8.00-9:35',
+    2 => '9:50-11:25',
+    3 => '11:55-13:30',
+    4 => '13:45-15:20',
+    5 => '15:50-17:25',
+];
+yii\bootstrap4\BootstrapAsset::register($this);
+
+function classContent($subgroup, $lesson, $teacher, $cabinet)
+{
+    switch ($subgroup) {
         case 0:
             return '<div class = "class"><div class = "class__top"><div class = "class__name">' . $lesson . '</div><div class = "class__teacher">' . $teacher . '</div></div><div class = "class__bottom"><div class = "class__cabinet">ауд. ' . $cabinet . '</div></div>';
         case 1:
@@ -24,7 +38,7 @@ function classContent($subgroup, $lesson, $teacher, $cabinet) {
         default:
             return 'Неверный номер подгруппы';
     }
-};
+}
 
 function getSpeciality($speciality) {
     switch ($speciality) {
@@ -49,6 +63,23 @@ function getSpeciality($speciality) {
     }
 }
 
+function getTime($number) {
+    switch ($number) {
+        case (1):
+            return '<div class="time">8.00-9:35</div>';
+        case (2):
+            return '<div class="time">9:50-11:25</div>';
+        case (3):
+            return '<div class="time">11:55-13:30</div>';
+        case (4):
+            return '<div class="time">13:45-15:20</div>';
+        case (5):
+            return '<div class="time">15:50-17:25</div>';
+        default:
+            return '<div class="time">Некорректное время</div>';
+    }
+}
+
 ?>
 
 <div class="schedule w-100 h-100">
@@ -68,8 +99,9 @@ function getSpeciality($speciality) {
                 </div>
             </div>
             <div class="schedule__right">
-                <div class="schedule__course"><?= $searchModel->week == 1 ? 'Нижняя' : 'Верхняя'  ?> неделя,
-                <?= $searchModel->course ?> курс <?= $searchModel->group ?> группа</div>
+                <div class="schedule__course"><?= $searchModel->week == 1 ? 'Нижняя' : 'Верхняя' ?> неделя,
+                    <?= $searchModel->course ?> курс <?= $searchModel->group ?> группа
+                </div>
             </div>
         </div>
     </div>
@@ -90,113 +122,49 @@ function getSpeciality($speciality) {
     </div>
 
     <div class="schedule__table w-80">
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'tableOptions' => [
-                'class' => 'table table-bordered'
-            ],
-            'layout' => "{items}",
-//        'filterModel' => $searchModel,
-            'columns' => [
-                [
-                    'class' => 'yii\grid\DataColumn',
-                    'attribute' => 'number',
-                    'label' => '',
-                    'format' => 'raw',
-                    "value" => function ($model) {
-                        switch ($model->number) {
-                            case (1):
-                                return '<div class="time">8.00-9:35</div>';
-                            case (2):
-                                return '<div class="time">9:50-11:25</div>';
-                            case (3):
-                                return '<div class="time">11:55-13:30</div>';
-                            case (4):
-                                return '<div class="time">13:45-15:20</div>';
-                            case (5):
-                                return '<div class="time">15:50-17:25</div>';
-                            default:
-                                return '<div class="time">Некорректное время</div>';
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Время</th>
+                <? foreach ($days as $dayTitle): ?>
+                    <th><?= $dayTitle ?></th>
+                <? endforeach; ?>
+            </tr>
+            </thead>
+            <tbody>
+            <? foreach ($dataProvider->models as $model): ?>
+                <tr>
+                    <? $maxSubgroupInNumber = 0;
+                    foreach ($models as $iterableModel) {
+                        if ($iterableModel['number'] != $model['number'] || $maxSubgroupInNumber > count($iterableModel['subgroups'])) {
+                            continue;
                         }
-                    },
-                    'contentOptions' => [
-                        'width' => '10%',
-                    ],
-                ],
-                [
-                    'class' => 'yii\grid\DataColumn',
-                    'attribute' => 'item',
-                    'label' => 'Понедельник',
-                    "format" => "raw",
-                    "value" => function ($model) {
-                        return $model->day == 1 ? classContent($model->subgroup, $model->lesson, $model->teacher, $model->cabinet) : '';
-                    },
-                    'contentOptions' => [
-                        'width' => '15%'
-                    ],
-                ],
-                [
-                    'class' => 'yii\grid\DataColumn',
-                    'attribute' => 'item',
-                    'label' => 'Вторник',
-                    "format" => "raw",
-                    "value" => function ($model) {
-                        return $model->day == 2 ? classContent($model->subgroup, $model->lesson, $model->teacher, $model->cabinet) : '';
-                    },
-                    'contentOptions' => [
-                        'width' => '15%'
-                    ],
-                ],
-                [
-                    'class' => 'yii\grid\DataColumn',
-                    'attribute' => 'item',
-                    'label' => 'Среда',
-                    "format" => "raw",
-                    "value" => function ($model) {
-                        return $model->day == 3 ? classContent($model->subgroup, $model->lesson, $model->teacher, $model->cabinet) : '';
-                    },
-                    'contentOptions' => [
-                        'width' => '15%',
-                    ],
-                ],
-                [
-                    'class' => 'yii\grid\DataColumn',
-                    'attribute' => 'item',
-                    'label' => 'Четверг',
-                    "format" => "raw",
-                    "value" => function ($model) {
-                        return $model->day == 4 ? classContent($model->subgroup, $model->lesson, $model->teacher, $model->cabinet) : '';
-                    },
-                    'contentOptions' => [
-                        'width' => '15%'
-                    ],
-                ],
-                [
-                    'class' => 'yii\grid\DataColumn',
-                    'attribute' => 'item',
-                    'label' => 'Пятница',
-                    "format" => "raw",
-                    "value" => function ($model) {
-                        return $model->day == 5 ? classContent($model->subgroup, $model->lesson, $model->teacher, $model->cabinet) : '';
-                    },
-                    'contentOptions' => [
-                        'width' => '15%'
-                    ],
-                ],
-                [
-                    'class' => 'yii\grid\DataColumn',
-                    'attribute' => 'item',
-                    'label' => 'Суббота',
-                    "format" => "raw",
-                    "value" => function ($model) {
-                        return $model->day == 6 ? classContent($model->subgroup, $model->lesson, $model->teacher, $model->cabinet) : '';
-                    },
-                    'contentOptions' => [
-                        'width' => '15%'
-                    ],
-                ],
-            ],
-        ]); ?>
+                        $maxSubgroupInNumber = count($iterableModel['subgroups']);
+                    } ?>
+                    <? if (!in_array($model['number'], $alreadyUseNumbers)): ?>
+                        <td class="w-auto text-center">
+                            <?= ArrayHelper::getValue($numbers, $model['number']) ?>
+                        </td>
+                        <? $alreadyUseNumbers[] = $model['number'] ?>
+                    <? endif; ?>
+                    <? foreach ($days as $dayNumber => $dayTitle): ?>
+                        <td>
+                            <?
+                            if ($model['day'] != $dayNumber) {
+                                echo '';
+                            } else {
+                                $value = '';
+                                foreach ($model['subgroups'] as $subgroup) {
+                                    $value .= classContent($subgroup['subgroup'], $subgroup['lesson'], $subgroup['teacher'], $subgroup['cabinet']);
+                                }
+                                echo $value;
+                            }
+                            ?>
+                        </td>
+                    <? endforeach; ?>
+                </tr>
+            <? endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </div>
-
