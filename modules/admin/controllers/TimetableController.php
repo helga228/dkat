@@ -1,8 +1,8 @@
 <?php
 
 namespace app\modules\admin\controllers;
+use app\models\Timetable;
 use app\models\TimetableSearch;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
